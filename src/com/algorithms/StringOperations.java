@@ -13,7 +13,10 @@ public class StringOperations {
 		}
 	}
 	
-	/* Given s string, Find max size of a sub-string, in which no duplicate chars present. */
+	/* Given s string, Find max size of a sub-string, in which no duplicate chars present. 
+	 * aaabbbcdebghiaaaa
+	 * aaaabbbb
+	 * */
 	public static int getSizeLongestSubstringWithDifferentChars(String word) {
 		char[] chars = word.toCharArray();
 		int maxLength = 1;
@@ -23,7 +26,8 @@ public class StringOperations {
 			if(charIndexOnCurrentString == -1){
 				currentString += String.valueOf(chars[i]);		
 			} else {
-				currentString = String.valueOf(chars[i]);
+				currentString += String.valueOf(chars[i]);
+				currentString = currentString.substring(charIndexOnCurrentString+1);
 			}
 			
 			if(currentString.length() > maxLength){
