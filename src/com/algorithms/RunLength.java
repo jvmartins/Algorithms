@@ -9,19 +9,31 @@ public class RunLength {
 		for(;;) {
 			System.out.println("Input string: ");
 			String string = sc.next();
-		    System.out.println(isPalindrome(string));
+		    System.out.println(getStringAsRunLength(string));
 		}
 	}
 	
-	/* Given a string check if it is a Palindrome */
-	public static boolean isPalindrome (String word) {
+	/* Get string in run length */
+	public static String getStringAsRunLength (String word) {
 		char[] chars = word.toCharArray();
-		for(int i = 0, j = chars.length-1; j-i >= 2; i++, j--){
-			if(chars[i] == chars[j]) {
-				continue;
-			} 
-			return false;
+		char previousChar = chars[0];
+		String runLengthString = String.valueOf(previousChar);
+		int charRepetition = 1;
+		
+		for (int i = 1; i < chars.length; i++) {
+			if(previousChar == chars[i]){
+				charRepetition++;
+			} else {
+				if(charRepetition >= 2){
+					runLengthString += charRepetition;
+				}
+				charRepetition = 1;
+				previousChar = chars[i];
+				
+				runLengthString += String.valueOf(previousChar);
+			}
 		}
-		return true;
+		runLengthString += charRepetition;
+		return runLengthString;
 	}
 }
