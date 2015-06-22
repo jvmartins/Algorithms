@@ -1,10 +1,10 @@
 package com.datastructures;
 
-public class TreeNode {		
-	private TreeNode left, right;
-	private String value;
+public class TreeNode<E> implements Comparable<E>{		
+	private TreeNode<E> left, right;
+	private E value;
 	
-	public TreeNode(TreeNode left, TreeNode right, String value) {
+	public TreeNode(TreeNode left, TreeNode right, E value) {
 		this.left = left;
 		this.right = right;
 		this.value = value;
@@ -26,11 +26,11 @@ public class TreeNode {
 		this.right = right;
 	}
 
-	public String getValue() {
+	public E getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(E value) {
 		this.value = value;
 	}
 	
@@ -47,5 +47,13 @@ public class TreeNode {
 		printed += "\n" + left;
 		printed += "\n" + right;
  		return printed;
+	}
+
+	@Override
+	public int compareTo(E o) {
+		if(this.getValue() == o) {
+			return 1;
+		}
+		return 0;
 	}
 }

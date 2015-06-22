@@ -1,13 +1,13 @@
 package com.datastructures;
 
-public class BinaryTree {
-	private TreeNode rootNode;
+public class BinaryTree<E> {
+	private TreeNode<E> rootNode;
 
-	public TreeNode getRootNode() {
+	public TreeNode<E> getRootNode() {
 		return rootNode;
 	}
 
-	public void setRootNode(TreeNode rootNode) {
+	public void setRootNode(TreeNode<E> rootNode) {
 		this.rootNode = rootNode;
 	}
 	
