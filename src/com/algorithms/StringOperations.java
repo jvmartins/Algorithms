@@ -14,11 +14,22 @@ public class StringOperations {
 			// System.out.println(reverseStringInJava(string));
 			// System.out.println(countOccurrencies(string, '1'));
 			// System.out.println(getNumberAsText(Integer.valueOf(string)));
+			// System.out.println(revertOrderWords(string));
 			
-			String string2 = sc.nextLine();
-			
-			System.out.println(getCommonContiguousIntersection(string, string2));
+			// String string2 = sc.nextLine();
+			// System.out.println(getCommonContiguousIntersection(string, string2));
 		}
+	}
+	
+	public static String revertOrderWords(String str){
+		String [] arrWords = str.split("\\s");
+		String revertedWords = "";
+		String separator = "";
+		for (int i = arrWords.length-1; i >= 0; i--) {
+			revertedWords += separator + arrWords[i];
+			separator = " ";
+		}
+		return revertedWords;
 	}
 	
 	/* Reverse a string */
