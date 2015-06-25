@@ -12,7 +12,12 @@ public class StringOperations {
 		    // System.out.println(getSizeLongestSubstringWithDifferentChars(string));
 			// System.out.println(reverseString(string));
 			// System.out.println(reverseStringInJava(string));
-			System.out.println(countOccurrencies(string, '1'));
+			// System.out.println(countOccurrencies(string, '1'));
+			// System.out.println(getNumberAsText(Integer.valueOf(string)));
+			
+			String string2 = sc.nextLine();
+			
+			System.out.println(getCommonContiguousIntersection(string, string2));
 		}
 	}
 	
@@ -73,5 +78,79 @@ public class StringOperations {
 			}
 		}
 		return maxLength;
+	}
+	
+	static String [] uni = {
+			"","one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+			"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+	static String [] dec = {
+			"twenty","thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+	static String [] mi = {
+			"hundred", "thousand", "million"};
+	
+	
+	
+	public static String getNumberAsText(int number){
+		
+		String numberStr = String.valueOf(number);
+		int length = numberStr.length();
+		if(length <= 3){
+			return getHundredsAsText(numberStr);
+		} else {
+			int digits = (int) Math.ceil(((double)length)/3) - 1;
+			String leftPart = numberStr.substring(0, length - (digits * 3));
+			int rightPart = Integer.valueOf(numberStr.substring(length - (digits * 3))); 
+			String mill = mi[digits];
+			return getHundredsAsText(leftPart) + "-" + mill + "-" + getNumberAsText(rightPart);
+		}
+		
+	}
+	
+	public static String getHundredsAsText(String numberStr) {
+		if(numberStr.length() == 3){
+			int hundred = Integer.valueOf(""+numberStr.charAt(0));
+			String h = uni[hundred];
+			return h + "-" + mi[0] + "-" + getDecimalAsText(numberStr.substring(1));
+		}
+		return getDecimalAsText(numberStr);
+	}
+
+	private static String getDecimalAsText(String substring) {
+		int decimal = Integer.valueOf(substring);
+		if(decimal < 20){
+			return uni[decimal];
+		}
+		int decimalChar = Integer.valueOf(substring.substring(0, 1));
+		int unitChar = Integer.valueOf(substring.substring(1));
+		
+		return dec[decimalChar-2] + "-" + uni[unitChar];
+	}
+	
+	
+	private static String getCommonContiguousIntersection(String list1, String list2) {
+		String listUsed = "";
+		String listCompared = "";
+		if(list1.length() < list2.length()) {
+			listUsed = list1;
+			listCompared = list2;
+		} else {
+			listUsed = list2;
+			listCompared = list1;
+		}
+		
+		for(int size = listUsed.length(); size > 1; size--){
+			for(int i = 0; i <= listUsed.length()-size; i++){
+				String substr = "";
+				if(size+i == listUsed.length()){
+					substr = listUsed.substring(i);
+				} else {
+					substr = listUsed.substring(i, size+i);
+				}
+				if(listCompared.contains(substr)){
+					return substr;
+				}
+			}
+		}
+		return null;
 	}
 }
