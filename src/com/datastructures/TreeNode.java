@@ -1,17 +1,17 @@
 package com.datastructures;
 
-public class TreeNode<E> implements Comparable<E>{		
-	private TreeNode<E> left, right;
-	private E value;
+public class TreeNode {		
+	private TreeNode left, right;
+	private Integer value;
 	
-	public TreeNode(TreeNode left, TreeNode right, E value) {
+	public TreeNode(TreeNode left, TreeNode right, Integer value) {
 		this.left = left;
 		this.right = right;
 		this.value = value;
 	}
 
 	public TreeNode getLeft() {
-		return left;
+		return this.left;
 	}
 
 	public void setLeft(TreeNode left) {
@@ -19,41 +19,34 @@ public class TreeNode<E> implements Comparable<E>{
 	}
 
 	public TreeNode getRight() {
-		return right;
+		return this.right;
 	}
 
 	public void setRight(TreeNode right) {
 		this.right = right;
 	}
 
-	public E getValue() {
-		return value;
+	public Integer getValue() {
+		return this.value;
 	}
 
-	public void setValue(E value) {
+	public void setValue(Integer value) {
 		this.value = value;
 	}
 	
 	@Override
 	public String toString() {
 		String printed = "\nroot: " + this.getValue();
-		if(left != null) {			
-			printed += "\nleft: " + left.getValue();			
+		if(this.left != null) {			
+			printed += "\nleft: " + this.left.getValue();			
 		}
-		if(right != null) {
-			printed += "\nright: " + right.getValue();
+		if(this.right != null) {
+			printed += "\nright: " + this.right.getValue();
 		}
 		
-		printed += "\n" + left;
-		printed += "\n" + right;
+		printed += "\n" + this.left;
+		printed += "\n" + this.right;
  		return printed;
 	}
 
-	@Override
-	public int compareTo(E o) {
-		if(this.getValue() == o) {
-			return 1;
-		}
-		return 0;
-	}
 }

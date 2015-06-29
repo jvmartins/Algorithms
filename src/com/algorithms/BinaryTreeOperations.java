@@ -10,62 +10,23 @@ import com.datastructures.TreeNode;
 public class BinaryTreeOperations {
 	
 	public static void main (String [] args){
-		
-		String[] names = new String[8];
-		names[0] = "Aderbal";
-		names[1] = "Beatriz";
-		names[2] = "Bruna";
-		names[3] = "Debora";
-		names[4] = "Ignacio";
-		names[5] = "Xavier";
-		names[6] = "Victor";
-		names[7] = "Victoria";
-		
-		String[] left = Arrays.copyOfRange(names, 0, 1);
-		System.out.println(left[0]);
-		System.out.println(left[left.length-1]);
-		String[] right = Arrays.copyOfRange(names, 4, 8);
-		System.out.println(right[0]);
-		System.out.println(right[right.length-1]);
-		
-		System.out.println(names.length);
-		BinaryTree btFromArray = convertToBinaryTree(names);
-		
-		System.out.println(btFromArray);
-		
-		System.out.println(findMinElement(btFromArray.getRootNode()));
-		System.out.println(findMaxElement(btFromArray.getRootNode()));
-		
-		
 		Integer [] arrayNumbers = {1,2,5,7,8,10,19,25};
-		BinaryTree<Integer> integerBT = convertToBinaryTree(arrayNumbers);
-		
+		BinaryTree integerBT = convertToBinaryTree(arrayNumbers);
 		System.out.println(checkIfIsBST(integerBT));
 		
-		BinaryTree<Integer> notBST = new BinaryTree<Integer>();
-		TreeNode<Integer> leaf1 = new TreeNode<Integer>(null, null, 1);
-		TreeNode<Integer> leaf2 = new TreeNode<Integer>(null, null, 4);
-		TreeNode<Integer> root = new TreeNode<Integer>(leaf1, leaf2, 5);
-		
+		BinaryTree notBST = new BinaryTree();
+		TreeNode leaf1 = new TreeNode(null, null, 1);
+		TreeNode leaf2 = new TreeNode(null, null, 4);
+		TreeNode root = new TreeNode(leaf1, leaf2, 5);
 		notBST.setRootNode(root);
-		
 		System.out.println(checkIfIsBST(notBST));
 		
 		System.out.println(findHeight(notBST.getRootNode()));
 		System.out.println(findHeight(integerBT.getRootNode()));
-		System.out.println(findHeight(btFromArray.getRootNode()));
 		
-		traversalTreeInOrder(btFromArray.getRootNode());
-		traversalTreeLevelOrder(btFromArray.getRootNode());
+		traversalTreeInOrder(integerBT.getRootNode());
+		traversalTreeLevelOrder(integerBT.getRootNode());
 		System.out.println(inOrderSucessor(integerBT.getRootNode(), 5));
-	}
-	
-	/* Convert array into BinaryTree */;
-	private static BinaryTree convertToBinaryTree(String[] arr) {
-		TreeNode rootNode = getSubTree(arr);
-		BinaryTree bt = new BinaryTree();
-		bt.setRootNode(rootNode);
-		return bt;
 	}
 	
 	/* Convert array into BinaryTree */;
@@ -76,24 +37,6 @@ public class BinaryTreeOperations {
 		return bt;
 	}
 	
-	private static TreeNode getSubTree(String[] array) {
-		int subTreeSize = array.length;
-		if(subTreeSize == 0){
-			return null;
-		}
-		if(subTreeSize == 1) {
-			return new TreeNode<>(null, null, array[0]);
-		}
-		double subTreeRootIndex = ((double) subTreeSize)/2;
-		int roundedIndex = (int) Math.ceil(subTreeRootIndex);
-		
-		TreeNode subTreeRootLeft = getSubTree(Arrays.copyOfRange(array, 0, roundedIndex-1));
-		TreeNode subTreeRootRight = getSubTree(Arrays.copyOfRange(array, roundedIndex, subTreeSize));
-		
-		TreeNode treeRoot = new TreeNode(subTreeRootLeft, subTreeRootRight, array[roundedIndex-1]);
-		
-		return treeRoot;
-	}
 	
 	private static TreeNode getSubTree(Integer[] array) {
 		int subTreeSize = array.length;
@@ -101,7 +44,7 @@ public class BinaryTreeOperations {
 			return null;
 		}
 		if(subTreeSize == 1) {
-			return new TreeNode<>(null, null, array[0]);
+			return new TreeNode(null, null, array[0]);
 		}
 		double subTreeRootIndex = ((double) subTreeSize)/2;
 		int roundedIndex = (int) Math.ceil(subTreeRootIndex);
@@ -114,18 +57,18 @@ public class BinaryTreeOperations {
 		return treeRoot;
 	}
 	
-	private static boolean checkIfIsBST (BinaryTree b) {
+	public static boolean checkIfIsBST (BinaryTree b) {
 		int max = Integer.MAX_VALUE;
 		int min = Integer.MIN_VALUE;
 		TreeNode root = b.getRootNode();
-		if(isBSTFromNode(root.getLeft(), min, (Integer)root.getValue()) && 
-				isBSTFromNode(root.getRight(), (Integer)root.getValue(), max)){
+		if(isBSTFromNode(root.getLeft(), min, root.getValue()) && 
+				isBSTFromNode(root.getRight(), root.getValue(), max)){
 			return true;
 		}
 		return false;
 	}
 	
-	private static boolean isBSTFromNode(TreeNode<Integer> root, int min, int max) {
+	private static boolean isBSTFromNode(TreeNode root, int min, int max) {
 		if(root == null){
 			return true;
 		}
@@ -140,11 +83,11 @@ public class BinaryTreeOperations {
 		return false;
 	}
 	
-	private static void deleteNodeFromBST (String name){
-		
+	public static void deleteNodeFromBST (String name){
+		// TODO
 	}
 	
-	private static void traversalTreeInOrder(TreeNode<String> root) {
+	public static void traversalTreeInOrder(TreeNode root) {
 		if(root == null) {
 			return;
 		}
@@ -154,9 +97,7 @@ public class BinaryTreeOperations {
 		traversalTreeInOrder(root.getRight());
 	}
 	
-	
-	
-	private static void traversalTreeLevelOrder(TreeNode<String> root) {
+	public static void traversalTreeLevelOrder(TreeNode root) {
 		List<TreeNode> queue = new ArrayList<TreeNode>();
 		
 		if(root == null){
@@ -173,14 +114,11 @@ public class BinaryTreeOperations {
 			if(node.getRight() != null){
 				queue.add(node.getRight());
 			}
-			
 		}
-		
 		return;
 	}
 	
-	
-	private static TreeNode findMinElement(TreeNode root) {
+	public static TreeNode findMinElement(TreeNode root) {
 		TreeNode current = root;
 		TreeNode min = root;
 		while(current != null) {
@@ -191,7 +129,7 @@ public class BinaryTreeOperations {
 		return min;
 	}
 	
-	private static TreeNode findMaxElement(TreeNode root) {
+	public static TreeNode findMaxElement(TreeNode root) {
 		TreeNode current = root;
 		TreeNode max = root;
 		while(current != null) {
@@ -202,7 +140,7 @@ public class BinaryTreeOperations {
 		return max;
 	}
 	
-	private static int findHeight(TreeNode root) {
+	public static int findHeight(TreeNode root) {
 		if(root == null) {
 			return 0;
 		}
@@ -214,25 +152,25 @@ public class BinaryTreeOperations {
 	}
 	
 	// Complexity: O(log n)
-	private static int inOrderSucessor(TreeNode<Integer> root, int value) {
-		TreeNode<Integer> node = findNodeWithValue(root, value);
+	private static int inOrderSucessor(TreeNode root, int value) {
+		TreeNode node = findNodeWithValue(root, value);
 		
 		if(node.getRight() != null) {
-			return (Integer) findMinElement(node.getRight()).getValue();
+			return findMinElement(node.getRight()).getValue();
 		}
 		
 		if(node.getRight() == null) {
 			TreeNode sucessor = null;
 			TreeNode ancestor = root;
 			while (ancestor != node) {
-				if(node.getValue() < (Integer)ancestor.getValue()){
+				if(node.getValue() < ancestor.getValue()){
 					sucessor = ancestor;
 					ancestor = ancestor.getLeft();
 				} else {
 					ancestor = ancestor.getRight();
 				}
 			}
-			return (Integer) sucessor.getValue();
+			return sucessor.getValue();
 		}
 		
 		
@@ -240,7 +178,7 @@ public class BinaryTreeOperations {
 	} 
 	
 	// Complexity: O(log n)
-	private static TreeNode findNodeWithValue(TreeNode<Integer> root, int value) {
+	private static TreeNode findNodeWithValue(TreeNode root, int value) {
 		if(root == null){
 			return null;
 		}

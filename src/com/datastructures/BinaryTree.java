@@ -1,19 +1,19 @@
 package com.datastructures;
 
-public class BinaryTree<E> {
-	private TreeNode<E> rootNode;
+public class BinaryTree {
+	private TreeNode rootNode;
 
-	public TreeNode<E> getRootNode() {
-		return rootNode;
+	public TreeNode getRootNode() {
+		return this.rootNode;
 	}
 
-	public void setRootNode(TreeNode<E> rootNode) {
+	public void setRootNode(TreeNode rootNode) {
 		this.rootNode = rootNode;
 	}
 	
 	@Override
 	public String toString() {
-		return rootNode.toString();
+		return this.rootNode.toString();
 	}
 	
 }
