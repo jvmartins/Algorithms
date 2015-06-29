@@ -1,5 +1,7 @@
 package com.algorithms;
 
+import java.util.Arrays;
+
 
 public class ArraysOperations {
 	
@@ -8,9 +10,21 @@ public class ArraysOperations {
 		
 		int [] nelements = {8,7,3,2,1,4,6,5,9,10};
 		
-		printSumPairs(elements);
-		printSecondLargestNumberInArray(elements);
-		System.out.println(containsAllNumbers(nelements));
+		//printSumPairs(elements);
+		//printSecondLargestNumberInArray(elements);
+		//System.out.println(containsAllNumbers(nelements));
+		
+		//System.out.println(Arrays.toString(nelements));
+		//System.out.println(Arrays.toString(mergeSort(nelements)));
+		
+		// countInversions(nelements);
+		// System.out.println(currentCount);
+		
+		//int [] coins = { 1,2,5,10,25,50,100,200 };
+		//System.out.println(countMinimumCoinsForAmount(coins, 5.43));
+		//System.out.println(countMinimumCoinsForAmount(coins, 0.67));
+		
+		System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
 	}
 	
 	/* Check if two elements in a SORTED array sum up to a third */
@@ -66,5 +80,136 @@ public class ArraysOperations {
 		
 		return true;
 	}
+	
+	
+	public static int[] mergeSort(int [] arr){
+		if(arr.length == 1 || arr.length == 0){
+			return arr;
+		}
+		
+		int [] leftArray = mergeSort(Arrays.copyOfRange(arr, 0, (arr.length/2)));
+		int [] rightArray = mergeSort(Arrays.copyOfRange(arr, arr.length/2, arr.length));
+		
+		return merge(leftArray, rightArray);
+	}
 
+	private static int[] merge(int[] leftArray, int[] rightArray) {
+		int [] mergedArray = new int[leftArray.length + rightArray.length];
+		
+		int lIndex = 0;
+		int rIndex = 0;
+		for(int i = 0; i < mergedArray.length; i++){
+			if(rIndex >= rightArray.length || (lIndex < leftArray.length && leftArray[lIndex] < rightArray[rIndex])){
+				mergedArray[i] = leftArray[lIndex];
+				lIndex++;
+			} else if (rIndex < rightArray.length){
+				mergedArray[i] = rightArray[rIndex];
+				rIndex++;
+			}
+		}
+		
+		return mergedArray;
+	}
+	
+	
+	static int currentCount = 0;
+	
+	public static int[] countInversions(int[] arr){
+		
+		if(arr.length == 1 || arr.length == 0){
+			return arr;
+		}
+		
+		int [] leftArray = countInversions(Arrays.copyOfRange(arr, 0, (arr.length/2)));
+		int [] rightArray = countInversions(Arrays.copyOfRange(arr, arr.length/2, arr.length));
+		
+		return countSplit(leftArray, rightArray);
+	}
+	
+	private static int[] countSplit(int[] leftArray, int[] rightArray) {
+		int [] mergedArray = new int[leftArray.length + rightArray.length];
+		
+		int lIndex = 0;
+		int rIndex = 0;
+		
+		for(int i = 0; i < mergedArray.length; i++){
+			if(rIndex >= rightArray.length || (lIndex < leftArray.length && leftArray[lIndex] < rightArray[rIndex])){
+				mergedArray[i] = leftArray[lIndex];
+				lIndex++;
+			} else if (rIndex < rightArray.length){
+				currentCount += leftArray.length-lIndex;
+				mergedArray[i] = rightArray[rIndex];
+				rIndex++;
+			}
+		}
+		
+		return mergedArray;
+	} 
+	
+	// Coin Problem - Dynamic Programming
+	// Not good for case: coins = {20,11,1}, amount = 22;
+	public static int countMinimumCoinsForAmount(int [] coins, double amount){
+		int cents = (int) (amount * 100);
+		int numberOfCoins = 0; 
+		for (int i = coins.length-1; i >=0; i--) {
+			while(cents >= coins[i]){
+				numberOfCoins++;
+				cents -= coins[i];
+				System.out.println(coins[i]);
+			}
+			if(cents == 0){
+				break;
+			}
+		}
+		return numberOfCoins;
+	}
+	
+	
+	// Not good enough
+	static int pivot = 0;
+	
+	public static int[] quickSort(int [] array, int leftEl, int rightEl){
+		
+		if(rightEl - leftEl <= 1){
+			return array;
+		}
+		
+		pivot = (int) Math.floor(Math.random() * (rightEl-leftEl + 1)) + leftEl;
+		int [] partitioned = quickPartition(array, leftEl, rightEl, pivot);
+		
+		int [] sortedLeft = partitioned;
+		int oldPivot = pivot;
+		if(pivot > 0){
+			sortedLeft = quickSort(partitioned, leftEl, pivot-1);
+		}
+		
+		int [] sortedRight = sortedLeft;
+		if(oldPivot < array.length){
+			sortedRight = quickSort(sortedLeft, oldPivot+1, rightEl);
+		}
+		
+		return sortedRight;
+	}
+
+	private static int[] quickPartition(int[] array, int leftEl, int rightEl, int pivoti) {
+		
+		int divisionIndex = leftEl;
+		int auxElement;
+		
+		for(int j = leftEl; j <= rightEl; j++) {
+			if(array[pivoti] > array[j]){
+				auxElement = array[divisionIndex];
+				array[divisionIndex] = array[j];
+				array[j] = auxElement;
+				divisionIndex++;
+			}
+		}
+		
+		auxElement = array[divisionIndex]; 
+		array[divisionIndex] = array[pivoti];
+		array[pivoti] = auxElement;
+		
+		pivot = divisionIndex;
+		return array;
+	}
 }

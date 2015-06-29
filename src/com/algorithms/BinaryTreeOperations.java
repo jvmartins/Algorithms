@@ -157,7 +157,6 @@ public class BinaryTreeOperations {
 	
 	
 	private static void traversalTreeLevelOrder(TreeNode<String> root) {
-		
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		
 		if(root == null){
@@ -214,6 +213,7 @@ public class BinaryTreeOperations {
 		return Math.max(leftSize, rightSize) + 1;
 	}
 	
+	// Complexity: O(log n)
 	private static int inOrderSucessor(TreeNode<Integer> root, int value) {
 		TreeNode<Integer> node = findNodeWithValue(root, value);
 		
@@ -239,8 +239,8 @@ public class BinaryTreeOperations {
 		return -1;
 	} 
 	
+	// Complexity: O(log n)
 	private static TreeNode findNodeWithValue(TreeNode<Integer> root, int value) {
-		
 		if(root == null){
 			return null;
 		}

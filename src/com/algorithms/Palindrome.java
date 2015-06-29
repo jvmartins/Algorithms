@@ -9,7 +9,8 @@ public class Palindrome {
 		for(;;) {
 			System.out.println("Input string: ");
 			String string = sc.next();
-		    System.out.println(isPalindrome(string));
+		    //System.out.println(isPalindrome(string));
+			System.out.println(completeAPalindrome(string));
 		}
 	}
 	
@@ -23,5 +24,33 @@ public class Palindrome {
 			return false;
 		}
 		return true;
+	}
+	
+	/* Identify what needs to be added at the end of a word to make it a palindrome */
+	public static String completeAPalindrome(String word) {
+		char[] chars = word.toCharArray();
+		int last = chars.length-1;
+		int startIndexOfCompletion = -1;
+		String completion = ""; 
+		
+		for(int k = 0; k < chars.length-1; k++){
+			if(chars[k] == chars[last]) {
+				last--;
+			} else {
+				startIndexOfCompletion = k;
+				last = chars.length-1;
+				if(chars[k] == chars[last]) {
+					last--;
+					startIndexOfCompletion = k-1;
+				}
+			}
+		}
+		
+		while(startIndexOfCompletion >= 0){
+			completion += "" + chars[startIndexOfCompletion];
+			startIndexOfCompletion--;
+		}
+		
+		return completion;
 	}
 }
