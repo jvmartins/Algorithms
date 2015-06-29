@@ -1,8 +1,8 @@
 package com.algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 import com.datastructures.BinaryTree;
 import com.datastructures.TreeNode;
@@ -157,7 +157,7 @@ public class BinaryTreeOperations {
 	
 	
 	private static void traversalTreeLevelOrder(TreeNode<String> root) {
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		List<TreeNode> queue = new ArrayList<TreeNode>();
 		
 		if(root == null){
 			return;
@@ -165,7 +165,7 @@ public class BinaryTreeOperations {
 		
 		queue.add(root);
 		while(!queue.isEmpty()) {
-			TreeNode node = queue.poll();
+			TreeNode node = queue.remove(queue.size()-1);
 			System.out.println(node.getValue());
 			if(node.getLeft() != null){
 				queue.add(node.getLeft());

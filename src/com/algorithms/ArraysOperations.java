@@ -24,7 +24,14 @@ public class ArraysOperations {
 		//System.out.println(countMinimumCoinsForAmount(coins, 5.43));
 		//System.out.println(countMinimumCoinsForAmount(coins, 0.67));
 		
-		System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
+		int [] coins1 = { 1,11,20 };
+		int [] coins2 = { 1,3,5 };
+		System.out.println(countMinimumCoinsForSum(coins1, 0.22));
+		System.out.println(countMinimumCoinsForSum(coins2, 0.11));
+		System.out.println(countMinimumCoinsForSum(coins2, 0.14));
+		System.out.println(countMinimumCoinsForSum(coins2, 0.15));
+		
+		//System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
 	}
 	
 	/* Check if two elements in a SORTED array sum up to a third */
@@ -146,8 +153,7 @@ public class ArraysOperations {
 		return mergedArray;
 	} 
 	
-	// Coin Problem - Dynamic Programming
-	// Not good for case: coins = {20,11,1}, amount = 22;
+	// Does not work for case: coins = {20,11,1}, amount = 22;
 	public static int countMinimumCoinsForAmount(int [] coins, double amount){
 		int cents = (int) (amount * 100);
 		int numberOfCoins = 0; 
@@ -164,6 +170,34 @@ public class ArraysOperations {
 		return numberOfCoins;
 	}
 	
+	// Coin Problem - Dynamic Programming
+	public static int countMinimumCoinsForSum(int [] coins, double sum){
+		int cents = (int) (sum * 100);
+		
+		if(cents == 0){
+			return 0;
+		}
+		
+		int [] sumsArray = new int[cents+1];
+		for (int i = 0; i < sumsArray.length; i++) {
+			sumsArray[i] = Integer.MAX_VALUE;
+		}
+		
+		sumsArray[0] = 0;
+		for(int i = 1; i <= cents; i++){
+			for (int j = 0; j < coins.length; j++){
+				if(coins[j] <= i && sumsArray[i-coins[j]]+1 < sumsArray[i]){
+					sumsArray[i] = sumsArray[i-coins[j]]+1;
+				}
+			}
+		}
+		
+		if(sumsArray[cents] == Integer.MAX_VALUE){
+			return 0;
+		}
+		
+		return sumsArray[cents];
+	}
 	
 	// Not good enough
 	static int pivot = 0;
