@@ -24,14 +24,32 @@ public class ArraysOperations {
 		//System.out.println(countMinimumCoinsForAmount(coins, 5.43));
 		//System.out.println(countMinimumCoinsForAmount(coins, 0.67));
 		
+		/*
 		int [] coins1 = { 1,11,20 };
 		int [] coins2 = { 1,3,5 };
 		System.out.println(countMinimumCoinsForSum(coins1, 0.22));
 		System.out.println(countMinimumCoinsForSum(coins2, 0.11));
 		System.out.println(countMinimumCoinsForSum(coins2, 0.14));
 		System.out.println(countMinimumCoinsForSum(coins2, 0.15));
+		*/
 		
-		//System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
+		int [][] matrix = {
+				{  1,  2,  6,  9 },
+				{  3,  4,  7, 11 },
+				{  5,  8, 10, 15 }};
+		
+		//System.out.println(findKthElementInRowOrderedMatrix(matrix, 8)); // 21
+		//System.out.println(findKthElementInOrderedMatrix(matrix, 8, (matrix.length + matrix[0].length - 1))); // 21
+		
+		int [] arrayFromMatrix = new int[matrix[0].length * matrix.length];
+		int k = 0;
+		for(int i = 0; i < matrix.length; i++){
+			for(int j = 0; j < matrix[0].length; j++,k++){
+				arrayFromMatrix[k] = matrix[i][j];
+			}
+		}
+		System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
+		System.out.println(Arrays.toString(quickSort(arrayFromMatrix, 0, nelements.length-1)));
 	}
 	
 	/* Check if two elements in a SORTED array sum up to a third */
@@ -199,34 +217,28 @@ public class ArraysOperations {
 		return sumsArray[cents];
 	}
 	
-	// Not good enough
-	static int pivot = 0;
-	
+	// TODO Fix code, still not sorting correctly
 	public static int[] quickSort(int [] array, int leftEl, int rightEl){
 		
-		if(rightEl - leftEl <= 1){
+		if(rightEl - leftEl < 1){
 			return array;
 		}
 		
-		pivot = (int) Math.floor(Math.random() * (rightEl-leftEl + 1)) + leftEl;
-		int [] partitioned = quickPartition(array, leftEl, rightEl, pivot);
+		int randomPivot = (int) Math.floor(Math.random() * (rightEl-leftEl + 1)) + leftEl;
+		int newPivot = quickPartition(array, leftEl, rightEl, randomPivot);
 		
-		int [] sortedLeft = partitioned;
-		int oldPivot = pivot;
-		if(pivot > 0){
-			sortedLeft = quickSort(partitioned, leftEl, pivot-1);
+		if(newPivot > 0){
+			quickSort(array, leftEl, newPivot-1);
 		}
 		
-		int [] sortedRight = sortedLeft;
-		if(oldPivot < array.length){
-			sortedRight = quickSort(sortedLeft, oldPivot+1, rightEl);
+		if(newPivot < array.length){
+			quickSort(array, newPivot+1, rightEl);
 		}
 		
-		return sortedRight;
+		return array;
 	}
 
-	private static int[] quickPartition(int[] array, int leftEl, int rightEl, int pivoti) {
-		
+	private static int quickPartition(int[] array, int leftEl, int rightEl, int pivoti) {
 		int divisionIndex = leftEl;
 		int auxElement;
 		
@@ -243,7 +255,44 @@ public class ArraysOperations {
 		array[divisionIndex] = array[pivoti];
 		array[pivoti] = auxElement;
 		
-		pivot = divisionIndex;
-		return array;
+		return divisionIndex;
+	}
+	
+	// Only if the matrix is row ordered.
+	public static int findKthElementInRowOrderedMatrix(int[][] matrix, int k) {
+		int numberOfRows = matrix.length;
+		int numberOfColumns = matrix[0].length;
+		
+		int rowIndexOfK = ((int) Math.ceil(k/numberOfRows)) - 1;
+		int columnIndexOfK = k - rowIndexOfK*numberOfColumns - 1;
+				
+		return matrix[rowIndexOfK][columnIndexOfK];
+	}
+	
+	// TODO Complete implementation
+	public static int findKthElementInOrderedMatrix(int[][] matrix, int k, int end) {
+		if(matrix.length == 0){
+			return -1;
+		}
+		
+		int numberOfRows = matrix.length;
+		int numberOfColumns = matrix[0].length;
+		
+		int totalElementsInMatrix = numberOfRows*numberOfColumns;
+		
+		int pivot = (int) Math.random()*totalElementsInMatrix;
+				
+		int newPivotAfterPartition = partitionOfMatrix(matrix, k, pivot);
+		if(newPivotAfterPartition == k){
+			return newPivotAfterPartition;
+		} else if(newPivotAfterPartition < k){
+			return findKthElementInOrderedMatrix(matrix, k, newPivotAfterPartition); // k
+		} else {
+			return findKthElementInOrderedMatrix(matrix, k, newPivotAfterPartition); // k - pivot
+		}
+	}
+	
+	private static int partitionOfMatrix(int [][] matrix, int k, int pivot) {
+		return 0;
 	}
 }
