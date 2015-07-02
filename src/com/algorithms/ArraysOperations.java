@@ -8,7 +8,7 @@ public class ArraysOperations {
 	public static void main (String [] args){
 		int [] elements = {15,25,35,45,55,65,120,490,1880,199902};
 		
-		int [] nelements = {8,7,3,2,1,4,6,5,9,10};
+		int [] nelements = {8,2,3,7,1};
 		
 		//printSumPairs(elements);
 		//printSecondLargestNumberInArray(elements);
@@ -49,7 +49,7 @@ public class ArraysOperations {
 			}
 		}
 		System.out.println(Arrays.toString(quickSort(nelements, 0, nelements.length-1)));
-		System.out.println(Arrays.toString(quickSort(arrayFromMatrix, 0, nelements.length-1)));
+		System.out.println(Arrays.toString(quickSort(arrayFromMatrix, 0, arrayFromMatrix.length-1)));
 	}
 	
 	/* Check if two elements in a SORTED array sum up to a third */
@@ -217,9 +217,7 @@ public class ArraysOperations {
 		return sumsArray[cents];
 	}
 	
-	// TODO Fix code, still not sorting correctly
-	public static int[] quickSort(int [] array, int leftEl, int rightEl){
-		
+	public static int[] quickSort(int [] array, int leftEl, int rightEl) {
 		if(rightEl - leftEl < 1){
 			return array;
 		}
@@ -227,33 +225,31 @@ public class ArraysOperations {
 		int randomPivot = (int) Math.floor(Math.random() * (rightEl-leftEl + 1)) + leftEl;
 		int newPivot = quickPartition(array, leftEl, rightEl, randomPivot);
 		
-		if(newPivot > 0){
-			quickSort(array, leftEl, newPivot-1);
-		}
-		
-		if(newPivot < array.length){
-			quickSort(array, newPivot+1, rightEl);
-		}
+		quickSort(array, leftEl, newPivot-1);		
+		quickSort(array, newPivot+1, rightEl);
 		
 		return array;
 	}
 
-	private static int quickPartition(int[] array, int leftEl, int rightEl, int pivoti) {
+	private static int quickPartition(int[] array, int leftEl, int rightEl, int pivot) {
 		int divisionIndex = leftEl;
 		int auxElement;
 		
 		for(int j = leftEl; j <= rightEl; j++) {
-			if(array[pivoti] > array[j]){
+			if(array[pivot] > array[j]) {
 				auxElement = array[divisionIndex];
 				array[divisionIndex] = array[j];
 				array[j] = auxElement;
+				if(divisionIndex == pivot){
+					pivot = j;
+				}
 				divisionIndex++;
 			}
 		}
 		
 		auxElement = array[divisionIndex]; 
-		array[divisionIndex] = array[pivoti];
-		array[pivoti] = auxElement;
+		array[divisionIndex] = array[pivot];
+		array[pivot] = auxElement;
 		
 		return divisionIndex;
 	}
