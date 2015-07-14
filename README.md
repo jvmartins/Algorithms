@@ -1,3 +1,3 @@
 # Algorithms
 
-Algorithms problems for interviews.
+Most common algorithms problems/solutions for interview processes.
