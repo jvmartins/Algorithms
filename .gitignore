@@ -4,3 +4,4 @@ browser-bundle.js
 bin
 .project
 .classpath
+.settings
