@@ -2,3 +2,4 @@ node_modules
 bower_components
 browser-bundle.js
 bin
+.project
