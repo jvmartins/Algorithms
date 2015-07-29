@@ -164,4 +164,27 @@ public class StringOperations {
 		}
 		return null;
 	}
+	
+	/*
+	 * http://codeforces.com/contest/559/problem/B
+	 * If two strings split in half are equal in any half.
+	 */
+	public static boolean equivalentStrings(String one, String two) {
+		if(one.equals(two)) {
+			return true;
+		}
+		
+		String firstHalfOne = one.substring(0, one.length()/2);
+		String secondHalfOne = one.substring(one.length()/2);
+		
+		String firstHalfTwo = two.substring(0, two.length()/2);
+		String secondHalfTwo = two.substring(two.length()/2);
+		
+		if(firstHalfOne.equals(firstHalfTwo) || firstHalfOne.equals(secondHalfTwo) || 
+				secondHalfOne.equals(secondHalfTwo) || secondHalfOne.equals(firstHalfTwo)) {
+			return true;
+		}
+		
+		return false;
+	}
 }
