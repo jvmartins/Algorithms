@@ -291,4 +291,19 @@ public class ArraysOperations {
 	private static int partitionOfMatrix(int [][] matrix, int k, int pivot) {
 		return 0;
 	}
+	
+	private static int[][] rotateMatrix90right(int[][] matrix) {
+		if(matrix.length < 1){
+			return null;
+		}
+		int[][] rotatedMatrix = new int[matrix[0].length][matrix.length];
+		
+		for(int i = 0, k = matrix.length-1; i < matrix.length; i++, k--){
+			for(int j = 0; j < matrix[i].length; j++){
+				rotatedMatrix[j][k] = matrix[i][j];
+			}
+		}
+		
+		return rotatedMatrix;
+	}
 }
