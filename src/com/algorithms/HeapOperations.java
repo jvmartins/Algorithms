@@ -2,7 +2,7 @@ package com.algorithms;
 
 import java.util.ArrayList;
 
-import com.datastructures.CustomHeap;
+import com.datastructures.heap.CustomHeap;
 
 public class HeapOperations {
 	

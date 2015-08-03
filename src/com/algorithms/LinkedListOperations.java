@@ -3,8 +3,8 @@ package com.algorithms;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.datastructures.AmazonDoublyLinkedList;
-import com.datastructures.AmazonLinkedList;
+import com.datastructures.linkedlist.CustomDoublyLinkedList;
+import com.datastructures.linkedlist.CustomLinkedList;
 
 
 public class LinkedListOperations {
@@ -20,7 +20,7 @@ public class LinkedListOperations {
 		//System.out.println(secondLastOfLinkedListInJava(linkedList));
 		//System.out.println(reverseLinkedListInJava(linkedList));
 		
-		AmazonLinkedList<String> amznLinkedList = new AmazonLinkedList<String>();
+		CustomLinkedList<String> amznLinkedList = new CustomLinkedList<String>();
 		amznLinkedList.add("First");
 		amznLinkedList.add("Second");
 		amznLinkedList.add("Third Last");
@@ -32,7 +32,7 @@ public class LinkedListOperations {
 		//System.out.println(amznLinkedList.getFromLast(1));
 		//System.out.println(amznLinkedList.getFromLast(0));
 		
-		AmazonDoublyLinkedList<String> amznDblyLinkedList = new AmazonDoublyLinkedList<String>();
+		CustomDoublyLinkedList<String> amznDblyLinkedList = new CustomDoublyLinkedList<String>();
 		amznDblyLinkedList.add("DB First");
 		amznDblyLinkedList.add("DB Second");
 		amznDblyLinkedList.add("DB Third Last");

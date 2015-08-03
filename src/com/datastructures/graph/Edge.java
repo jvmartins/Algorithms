@@ -1,5 +1,7 @@
 package com.datastructures.graph;
 
-public class Edge {
+import java.util.List;
 
+public class Edge {
+	List<Vertex> vertexes;
 }

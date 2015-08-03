@@ -1,4 +1,4 @@
-package com.datastructures;
+package com.datastructures.heap;
  
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

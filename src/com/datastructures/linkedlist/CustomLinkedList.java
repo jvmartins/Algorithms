@@ -1,15 +1,17 @@
-package com.datastructures;
+package com.datastructures.linkedlist;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmazonDoublyLinkedList<E> {
+import com.datastructures.Node;
+
+public class CustomLinkedList<E> {
 	
 	private Node<E> head;
 	
 	public void add(E value) {
 		if(head == null){
-			head = new Node<E>(value, null, null);
+			head = new Node<E>(value, null);
 			return;
 		}
 		
@@ -17,37 +19,7 @@ public class AmazonDoublyLinkedList<E> {
 		while(currentLast.getNext() != null) {
 			currentLast = currentLast.getNext();
 		}
-		currentLast.setNext(new Node<E>(value, currentLast, null));
-	}
-	
-	public AmazonDoublyLinkedList<E> reverse() {
-		if(head == null){
-			return null;
-		}
-		
-		Node<E> current = head;
-		
-		Node<E> next = null;
-		Node<E> previous = null;
-		
-		while(current.getNext() != null){
-			
-			next = current.getNext();
-			previous = current.getPrevious();
-					
-			current.setPrevious(next);
-			current.setNext(previous);
-			
-			current = next;
-		}
-		
-		previous = current.getPrevious();
-		current.setNext(previous);
-		current.setPrevious(null);
-		
-		head = current;
-		
-		return this;
+		currentLast.setNext(new Node<E>(value, null));
 	}
 	
 	/**
@@ -95,5 +67,4 @@ public class AmazonDoublyLinkedList<E> {
 		
 		return sb.toString();
 	}
-
 }

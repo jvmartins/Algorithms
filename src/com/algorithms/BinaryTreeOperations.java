@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.datastructures.BinaryTree;
-import com.datastructures.TreeNode;
+import com.datastructures.tree.BinaryTree;
+import com.datastructures.tree.TreeNode;
 
 public class BinaryTreeOperations {
 	
