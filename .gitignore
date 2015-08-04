@@ -6,3 +6,4 @@ bin
 .classpath
 .settings
 /bin1/
+/target/
