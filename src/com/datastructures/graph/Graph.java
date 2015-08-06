@@ -3,13 +3,12 @@ package com.datastructures.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UndirectedGraph {
+public class Graph {
 	
-	List<UndirectedVertex> vertices;
+	List<Vertex> vertices;
 	
-	
-	public UndirectedGraph() {
-		this.vertices = new ArrayList<UndirectedVertex>();
+	public Graph() {
+		this.vertices = new ArrayList<Vertex>();
 	}
 	
 	public void markAllVerticesUnexplored () {
@@ -19,16 +18,16 @@ public class UndirectedGraph {
 	}
 	
 	public void resetAllDistances() {
-		for (UndirectedVertex vertex : vertices) {
+		for (Vertex vertex : vertices) {
 			vertex.setDistance(Integer.MAX_VALUE);
 		}
 	}
 	
-	public List<UndirectedVertex> getVertices() {
+	public List<Vertex> getVertices() {
 		return this.vertices;
 	}
 	
-	public void addVertex (UndirectedVertex v){
+	public void addVertex (Vertex v){
 		this.vertices.add(v);
 	}
 }

@@ -3,19 +3,19 @@ package com.datastructures.graph;
 
 public class Edge {
 	
-	DirectedVertex from;
-	DirectedVertex to;
+	Vertex from;
+	Vertex to;
 	
-	public DirectedVertex getFrom() {
+	public Vertex getFrom() {
 		return from;
 	}
-	public void setFrom(DirectedVertex from) {
+	public void setFrom(Vertex from) {
 		this.from = from;
 	}
-	public DirectedVertex getTo() {
+	public Vertex getTo() {
 		return to;
 	}
-	public void setTo(DirectedVertex to) {
+	public void setTo(Vertex to) {
 		this.to = to;
 	}
 	

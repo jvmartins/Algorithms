@@ -1,10 +1,21 @@
 package com.datastructures.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vertex {
 	
-	boolean explored;
+	List<Vertex> connections;
 	
+	private int distance = Integer.MAX_VALUE;
+	boolean explored;
 	int value;
+	
+	public Vertex(int value) {
+		this.connections = new ArrayList<Vertex>();
+		this.explored = false;
+		this.value = value;
+	}
 	
 	public boolean isExplored() {
 		return explored;
@@ -35,4 +46,21 @@ public class Vertex {
 		}
 		return false;
 	}
+	
+	public void addConnection (Vertex connection) {
+		this.connections.add(connection);
+	}
+	
+	public List<Vertex> getConnections() {
+		return connections;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
 }

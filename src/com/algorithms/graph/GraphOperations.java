@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.datastructures.graph.UndirectedGraph;
-import com.datastructures.graph.UndirectedVertex;
+import com.datastructures.graph.Graph;
+import com.datastructures.graph.Vertex;
 
 public class GraphOperations {
 	
-	public static List<UndirectedVertex> breadthFirstSearch (UndirectedGraph graph, UndirectedVertex start){
-		LinkedList<UndirectedVertex> queue = new LinkedList<UndirectedVertex>();
-		List<UndirectedVertex> orderedVertices = new ArrayList<UndirectedVertex>();
+	// BFS for undirected graph
+	public static List<Vertex> breadthFirstSearch(Graph graph, Vertex start){
+		LinkedList<Vertex> queue = new LinkedList<Vertex>();
+		List<Vertex> orderedVertices = new ArrayList<Vertex>();
 		
 		graph.markAllVerticesUnexplored();
 		
@@ -19,11 +20,11 @@ public class GraphOperations {
 		queue.add(start);
 		
 		while(!queue.isEmpty()) {
-			UndirectedVertex v = queue.remove();
+			Vertex v = queue.remove();
 			
 			orderedVertices.add(v);
 			
-			for (UndirectedVertex connectedVertex : v.getConnections()) {
+			for (Vertex connectedVertex : v.getConnections()) {
 				if(!connectedVertex.isExplored()){
 					connectedVertex.setExplored();
 					queue.add(connectedVertex);
@@ -33,45 +34,51 @@ public class GraphOperations {
 		return orderedVertices;
 	}
 	
-	public static List<UndirectedVertex> findShortestPath (UndirectedGraph graph, UndirectedVertex start, UndirectedVertex goal) {
-		List<UndirectedVertex> path = new ArrayList<UndirectedVertex>();
-		LinkedList<UndirectedVertex> queue = new LinkedList<UndirectedVertex>();
+	// BFS - Finding number of levels in a shortest path for undirected Graph
+	public static int findShortestPath(Graph graph, Vertex start, Vertex goal) {
+		LinkedList<Vertex> queue = new LinkedList<Vertex>();
 		
 		graph.markAllVerticesUnexplored();
 		graph.resetAllDistances();
 		
 		start.setExplored();
-		int level = 0;
-		start.setDistance(level);
+		start.setDistance(0);
 		queue.add(start);
 		
 		while(!queue.isEmpty()) {
-			UndirectedVertex v = queue.remove();
-			for (UndirectedVertex connectedVertex : v.getConnections()) {
+			Vertex v = queue.remove();
+			for (Vertex connectedVertex : v.getConnections()) {
 				if(!connectedVertex.isExplored()) {
-					if(level == v.getDistance()) {
-						level++;
-						path.add(connectedVertex);
-					}
 					
 					connectedVertex.setExplored();
-					connectedVertex.setDistance(level);
+					connectedVertex.setDistance(v.getDistance() + 1);
+					
 					queue.add(connectedVertex);
 					
 					if(connectedVertex.equals(goal)) {
-						return path;
+						return connectedVertex.getDistance();
 					}
 				}
 			}
 		}
 		
-		return path;
+		return -1;
 	}
 	
-	public static List<UndirectedVertex> findConnectedComponents (UndirectedGraph graph, UndirectedVertex start) {
-		List<UndirectedVertex> connectedComponents = new ArrayList<UndirectedVertex>();
-		//TODO implement
+	// BFS - Finding connected components in an undirected graph
+	public static List<Vertex> findConnectedComponents (Graph graph, Vertex start) {
+		List<Vertex> connectedComponents = new ArrayList<Vertex>();
 		return connectedComponents;
+	}
+	
+	// DFS - Topological Sort of directed graphs
+	public static List<Vertex> DFSTopologicalSort() {
+		return null;
+	}
+	
+	// DFS - Removing cycles with strongly connected components in a directed graph
+	public static void removeCyclesWithDFS () {
+		
 	}
 	
 }
