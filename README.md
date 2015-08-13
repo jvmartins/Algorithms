@@ -11,3 +11,5 @@ Algorithms implementations in Java:
 - Priority Queues
 - Quick and Union Find
 - Binary Trees
+- Rotate Singly Linked List
+- Minimum Sum in a subarray
