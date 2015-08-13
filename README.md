@@ -1,3 +1,13 @@
 # Algorithms
 
-Most common algorithms problems/solutions for interview processes.
+Algorithms implementations in Java:
+
+- Skyline Problem
+- Graph Search
+- Dijkstra Shortest Paths
+- Sorting
+  - Merge-sort, quick-sort, radix-sort
+- Linked Lists
+- Priority Queues
+- Quick and Union Find
+- Binary Trees
